@@ -37,7 +37,7 @@
     object-fit:cover;
     object-position: 50% 50%;
     margin-top: 10%;
-    filter: brightness(20%);
+    filter: brightness(50%);
     position:relative;
   }
   

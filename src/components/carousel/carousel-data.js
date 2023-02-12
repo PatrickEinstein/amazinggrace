@@ -4,21 +4,38 @@ export const images = [
       id: 1,
       name: 'Pink T-shirt',
      src: 'https://i.ibb.co/RvwnBL8/pink-shirt.png',
-      price: 25
+      price: 25,
 },
     
 {
     id: 2,
     name: 'White Blouse',
    src: 'https://i.ibb.co/qBcrsJg/white-vest.png',
-    price: 20
+    price: 20,
   },
-  {
-    id: 3,
-    name: 'Timberlands',
-   src: 'https://i.ibb.co/Mhh6wBg/timberlands.png',
-    price: 200
-  },
+  
+    {
+      id: 3,
+      name: 'Timberlands',
+      src: 'https://i.ibb.co/Mhh6wBg/timberlands.png',
+      price: 200
+    },
+
+    {
+      id: 4,
+      name: 'Nike White AirForce',
+      src: 'https://i.ibb.co/1RcFPk0/white-nike-high-tops.png',
+      price: 160
+    },
+
+    {
+      id: 5,
+      name: 'Black Jean Shearling',
+      src: 'https://i.ibb.co/XzcwL5s/black-shearling.png',
+      price: 125
+    },
+
+
   ];
        
   export const animetxts = [

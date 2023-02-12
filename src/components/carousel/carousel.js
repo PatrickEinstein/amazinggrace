@@ -10,13 +10,16 @@ export const ImageCarousel = () => {
   const settings = {
     infinite: true,
     dots: true,
-    slidesToShow: 1,
+    slidesToShow: 3,
     arrows: true,
     slidesToScroll: 1,
-    lazyLoad: true,
+    lazyLoad: false,
     autoplay: true,
     autoplaySpeed: 2000,
     cssEase: "linear",
+    centerPadding:'2%',
+    centerMode: true,
+    
   };
   const settings2 = {
     infinite: true,
@@ -26,6 +29,7 @@ export const ImageCarousel = () => {
     autoplaySpeed: 2000,
     cssEase: "linear",
     slidesToScroll: 1,
+    arrows: false,
   };
   console.log(images);
   return(
