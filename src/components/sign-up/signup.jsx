@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-
+import { useState } from "react";
 import FormInput from "../form/form";
 import Button from "../button/button";
-
+import { Route } from "react-router-dom";
 import {
   createUserData,
   auth,
@@ -15,23 +15,23 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import { Navigate } from "react-router-dom";
+import SignIn from "../signin/signin";
 
-class SignUp extends React.Component {
-  constructor(props) {
-    super(props);
+const SignUp = ( ) => {
 
-    this.state = {
-      displayName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    };
-  }
+  const [ userCredentials, setuserCredentials] = useState({
+    displayName: '',
+    email:'',
+    password: '',
+    confirmPassword: ''
+  })
 
-  handleSubmit = async (event) => {
+  const { displayName, email, password, confirmPassword } = userCredentials;
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const { displayName, email, password, confirmPassword } = this.state;
+   
 
     if (password !== confirmPassword) {
       alert("passwords don't match");
@@ -39,15 +39,13 @@ class SignUp extends React.Component {
 
     try {
       createUserWithEmailAndPassword()
-        .then((userCredential) => {
-          const user = userCredential.user;
-        })
-
-        .catch((error) => {
-          console.log(error.code);
-          console.log(error.message);
+        .then((userCredentials) => {
+          const user = userCredentials.user;
+          console.log(`created user with mail and pass for ${user}`)
+        }).catch((error)=>{
+          console.log(`could not create user with email and pass =>${error}`)
         });
-
+      
       const { user } = await createUserWithEmailAndPassword(
         auth,
         email,
@@ -56,34 +54,35 @@ class SignUp extends React.Component {
 
       await createUserData(user, { displayName });
 
-      this.setState({
+      setuserCredentials({
         displayName: "",
         email: "",
         password: "",
         confirmPassword: "",
       });
-    } catch (error) {
+    }catch (error) {
       console.log(error);
     }
   };
-
-  handleChange = (event) => {
+  
+  
+ const handleChange = (event) => {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    setuserCredentials({...userCredentials , [name]: value });
   };
 
-  render() {
-    const { displayName, email, password, confirmPassword } = this.state;
+  
+    
     return (
       <div className="signup">
         <h1 className="title"> I do not have an account </h1>
         <span>Sign up with your email and password</span>
-        <form className="signupform" onSubmit={this.handleSubmit}>
+        <form className="signupform" onSubmit={handleSubmit}>
           <FormInput
             type="text"
             name="displayName"
             value={displayName}
-            onChange={this.handleChange}
+            onChange={handleChange}
             label="Display Name"
             required
           />
@@ -92,7 +91,7 @@ class SignUp extends React.Component {
             type="email"
             name="email"
             value={email}
-            onChange={this.handleChange}
+            onChange={handleChange}
             label="Email"
             required
           />
@@ -101,7 +100,7 @@ class SignUp extends React.Component {
             type="password"
             name="password"
             value={password}
-            onChange={this.handleChange}
+            onChange={handleChange}
             label="Password"
             required
           />
@@ -110,7 +109,7 @@ class SignUp extends React.Component {
             type="password"
             name="confirmPassword"
             value={confirmPassword}
-            onChange={this.handleChange}
+            onChange={handleChange}
             label="Password"
             required
           />
@@ -119,6 +118,6 @@ class SignUp extends React.Component {
       </div>
     );
   }
-}
+
 
 export default SignUp;

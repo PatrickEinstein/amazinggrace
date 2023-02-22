@@ -16,16 +16,17 @@ import shopReducer from '../reducers/shop-reducer';
 const persistConfig ={
   key: 'root',
   storage,
+  blacklist: ['user']
 };
 
 
-const userPersistConfig = {
-  key: 'user',
-  storage: sessionStorage,
-}
+// const userPersistConfig = {
+//   key: 'user',
+//   storage: sessionStorage,
+// }
 
 const rootReducer = combineReducers({ 
- /* user: userReducer,*/ user: persistReducer(userPersistConfig, userReducer),
+ user: userReducer,
   filters: filtersReducer,
   cart: CartReducer,
   directory: directoryReducer,
@@ -37,14 +38,15 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer:  persistedReducer,
   middleware: [thunk],
   devTools: process.env.NODE_ENV !== 'production',
   
 });
 
 
-export const persistor = persistStore(store);
+export const persistor = persistStore(store );
 
 export default store ;
 
+//user: persistReducer(userPersistConfig, userReducer),

@@ -35,7 +35,7 @@ export const ImageCarousel = () => {
   return(
     <div className='carousel1'>
 
-      <div className="absolute">
+      <div className="relative">
       <Slider {...settings} >
        {
        images.map((item) =>(
@@ -47,7 +47,7 @@ export const ImageCarousel = () => {
       </Slider>
 
       
-      <div className="relative">
+      <div className="absolute">
         <Slider  {...settings2}  className="txts">
         
         {

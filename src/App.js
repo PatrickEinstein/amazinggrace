@@ -85,7 +85,7 @@ setCurrentUser: (user) => dispatch(setCurrentUser(user))
 console.log(store.getState());
 
 const unsubscribe = store.subscribe(() =>
-console.log('State after dispatch: ', store.getState()));
+console.log('State after dispatch: ', store.getState().user));
 
 export default connect(mapStateToProps, mapDispatchToProps)(App); 
 

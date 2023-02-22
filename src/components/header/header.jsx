@@ -9,10 +9,36 @@ import { SignOut } from "../collectionitems/firebase/firebase.utils";
 import CartDropdown from "../cartmenu-dropdown/cartmenu-dropdown";
 import { ReactComponent as Logo } from '../../assets/assets.svg'
 import { auth } from "../collectionitems/firebase/firebase.utils";
+import { useEffect } from 'react';
+import { Route } from 'react-router-dom';
+import SignIn from '../../components/signin/signin';
+import { useNavigate } from "react-router-dom";
 
 
 
-const Header = ({currentUser, hidden}) => {
+
+const Header = ({hidden}) => {
+
+  const navigate = useNavigate()
+
+  useEffect( ( ) =>{
+
+    console.log('i have mounted')
+    console.log(auth.currentUser);
+    if(!auth.currentUser){
+        navigate(-1)
+       }
+
+    return( () =>{
+      console.log('byebye')
+      console.log(auth.currentUser)
+      
+    }
+    )
+    
+
+  },[auth.currentUser])
+
   return (
     <div className="header">
       <div className="logo-container ">
@@ -33,21 +59,23 @@ const Header = ({currentUser, hidden}) => {
           CONTACT{" "}
         </Link>
 
-        { !currentUser ? 
+        {auth.currentUser ? 
         
         (
-          <Link to="/signin" className="links0">
-            SIGN IN
-          </Link>
+          
+      <div
+      className="links0"
+      onClick = {SignOut}
+      style={{ cursor: "pointer" }}>
+      SIGN OUT
+      </div>
+       
         )
         :
         (
-          <div
-            className="links0"
-            onClick = {SignOut}
-            style={{ cursor: "pointer" }}>
-           SIGN OUT 
-          </div>
+        <Link to="/signin" className="links0">
+          SIGN IN
+        </Link>
         ) 
         }
         <CartItem/>

@@ -7,6 +7,9 @@ import { render } from '@testing-library/react';
 import {ImageCarousel} from '../../components/carousel/carousel';
 
 const Homepage = () => {
+
+
+
   return(
 
 
