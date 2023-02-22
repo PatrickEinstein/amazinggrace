@@ -65,17 +65,18 @@ signInWithPopup()
   });
 
   export const SignOut =() =>{
-
+    
   const auth = getAuth();
-
+    console.log(auth);
      return (
           signOut(auth)
         .then(() => {
-          console.log("signout successful");
+          console.log("signout successful")
         })
         .catch((error) => {
-          console.log(error);
+          console.log(error)
         })
+        
      )
   };
   

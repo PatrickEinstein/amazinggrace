@@ -15,7 +15,7 @@ export const ImageCarousel = () => {
     slidesToScroll: 1,
     lazyLoad: false,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 1500,
     cssEase: "linear",
     centerPadding:'2%',
     centerMode: true,

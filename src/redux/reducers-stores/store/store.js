@@ -2,7 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import {userReducer}  from '../reducers/userReducer';
 import filtersReducer from '../reducers/filtersReducer';
 import CartReducer from '../reducers/cartReducer';
-
+import persistReducer from 'redux-persist/lib/persistReducer';
+import persistStore from 'redux-persist/es/persistStore';
 import sessionStorage from 'redux-persist/lib/storage/session'
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
@@ -24,14 +25,14 @@ const userPersistConfig = {
 }
 
 const rootReducer = combineReducers({ 
-  user: userReducer,/* user: persistReducer(userPersistConfig, userReducer),*/
+ /* user: userReducer,*/ user: persistReducer(userPersistConfig, userReducer),
   filters: filtersReducer,
   cart: CartReducer,
   directory: directoryReducer,
   shop: shopReducer,
 });
 
-//const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 
 
@@ -43,7 +44,7 @@ const store = configureStore({
 });
 
 
-//export const persistor = persistStore(store);
+export const persistor = persistStore(store);
 
 export default store ;
 

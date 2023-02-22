@@ -2,12 +2,13 @@ import { render } from "@testing-library/react";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./header.css";
-import { Link} from "react-router-dom";
+import { Link, Navigate} from "react-router-dom";
 import {connect} from "react-redux";
 import CartItem from "../cart-icon /cart-icon";
 import { SignOut } from "../collectionitems/firebase/firebase.utils";
 import CartDropdown from "../cartmenu-dropdown/cartmenu-dropdown";
 import { ReactComponent as Logo } from '../../assets/assets.svg'
+import { auth } from "../collectionitems/firebase/firebase.utils";
 
 
 
@@ -32,19 +33,23 @@ const Header = ({currentUser, hidden}) => {
           CONTACT{" "}
         </Link>
 
-        {currentUser ? (
-          <div
-            className="links0"
-            onClick = {SignOut}
-            style={{ cursor: "pointer" }}
-          >
-            SIGN OUT
-          </div>
-        ) : (
+        { !currentUser ? 
+        
+        (
           <Link to="/signin" className="links0">
             SIGN IN
           </Link>
-        )}
+        )
+        :
+        (
+          <div
+            className="links0"
+            onClick = {SignOut}
+            style={{ cursor: "pointer" }}>
+           SIGN OUT 
+          </div>
+        ) 
+        }
         <CartItem/>
       </div>
 
